@@ -1,10 +1,15 @@
 /* General Body and App Container Styles */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Merriweather', serif;
     background-color: #0d0a1a; /* Dark magical purple */
     color: var(--tg-theme-text-color, #e0e0e0);
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,7 +19,6 @@ body {
 
 #app-container {
     width: 100%;
-    max-width: 500px;
     box-sizing: border-box;
     position: relative;
     z-index: 1;
