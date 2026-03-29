@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page not found</title>
+        <meta charset="utf-8"/>
+        <meta name=viewport content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
+        <ul id="p4p-scene" class="p4p-desert-scene">
+            <li class="layer" data-depth="0.00">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.10">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.20">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.30">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.40">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.50">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.70">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0.90">
+                <div class="p4p-parallax-background"></div>
+            </li>
+            <li class="layer" data-depth="0">
+                <div class="p4p-text-layer">
+                    <h1><span>Whoops!</span>Looks like you've ventured too far into the desert.</h1>
+                    <p>The page you were looking for could not be found. <a href="/">Head back home</a>, or</p>
+           <form class='search-form' action="/search.php">
+                <input  name="searchterm" type='text' placeholder='Search' id='search'/>
+                <input name="lang" type="hidden"  value="en">
+             </form>
+               
+                </div>
+            </li>
+        </ul>
+        
+        <link rel="stylesheet" href="/error/assets/css/desert.min.css" />
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <script src="/error/assets/js/parallax.min.js"></script>
+        <script src="/error/assets/js/desert.min.js"></script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b8bee7bf8e86d07',t:'MTc2NzU0MjI0NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+
+
+
