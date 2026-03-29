@@ -30,19 +30,25 @@ document.addEventListener('DOMContentLoaded', () => {
         currentLanguage = translations[userLanguage] ? userLanguage : 'en';
     }
 
-    const languageSelect = document.getElementById('language-select');
-    languageSelect.value = currentLanguage;
-    updateUI(currentLanguage); // Update main UI texts immediately
+    // Update the main page UI immediately
+    updateUI(currentLanguage);
 
-    // Wait for all custom elements to be defined before setting their language
+    const languageSelect = document.getElementById('language-select');
+    if (languageSelect) {
+        languageSelect.value = currentLanguage;
+        languageSelect.addEventListener('change', (event) => {
+            setLanguage(event.target.value, true);
+        });
+    }
+
+    // Wait for all custom elements to be defined before setting their language and translating them
     const allDefined = allDivinationComponents.map(tag => customElements.whenDefined(tag));
 
     Promise.all(allDefined).then(() => {
-        setLanguage(currentLanguage, false); // Set language on components without re-updating main UI
-    });
-
-    languageSelect.addEventListener('change', (event) => {
-        setLanguage(event.target.value, true);
+        // Set the language on components so they render their initial content
+        setLanguageOnComponents(currentLanguage);
+        // Update the UI again to ensure any text inside components is also translated
+        updateUI(currentLanguage);
     });
 
     // Screen and tab navigation
@@ -55,16 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.getElementById(screenId).classList.add('active');
         
-        // When returning to the main screen, remove any divination-specific background
         if (screenId === 'main-screen') {
-            divinationScreen.className = 'screen'; // Reset classes
+            divinationScreen.className = 'screen';
         }
     }
 
     function switchTab(targetId) {
-        // Clear existing background classes
         divinationScreen.className = 'screen';
-        // Add the new background class
         divinationScreen.classList.add(`divination-screen-${targetId}`);
 
         tabs.forEach(tab => {
@@ -91,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Initial setup
     showScreen('main-screen');
 });
 
@@ -101,8 +103,10 @@ function setLanguage(lang, updateMainUI = true) {
     if (updateMainUI) {
         updateUI(lang);
     }
-    
-    // Update the language attribute on all custom elements
+    setLanguageOnComponents(lang);
+}
+
+function setLanguageOnComponents(lang) {
     const componentSelector = allDivinationComponents.join(', ');
     document.querySelectorAll(componentSelector).forEach(el => {
         if (customElements.get(el.tagName.toLowerCase())) {
