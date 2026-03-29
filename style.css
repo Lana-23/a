@@ -1,1 +1,194 @@
-/* Add styles here */
+/* General Body and App Container Styles */
+body {
+    font-family: 'Merriweather', serif;
+    background-color: #0d0a1a; /* Dark magical purple */
+    color: var(--tg-theme-text-color, #e0e0e0);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+}
+
+/* Screens */
+.screen {
+    display: none;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow-y: auto;
+    padding: 4rem 1rem 1rem;
+}
+.screen.active { display: block; }
+
+#main-screen {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+#divination-screen {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+/* Language Switcher */
+.language-switcher {
+    position: fixed;
+    top: 1rem; right: 1rem;
+    z-index: 1001;
+}
+#language-select {
+    background-color: var(--tg-theme-secondary-bg-color, rgba(51, 51, 51, 0.8));
+    color: var(--tg-theme-button-text-color, #d4af37);
+    border: 1px solid var(--tg-theme-button-color, #d4af37);
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+    backdrop-filter: blur(5px);
+}
+#language-select option {
+    background-color: #333;
+    color: #e0e0e0;
+}
+#language-label { color: var(--tg-theme-text-color, #e0e0e0); font-size: 0.9rem; margin-right: 0.5rem; }
+
+/* Navigation */
+nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+}
+
+.nav-btn {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem; /* Space between icon and text */
+    font-size: 1rem;
+    background-size: 200% 200%;
+    background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.1"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');
+}
+.nav-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+.nav-btn img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%); /* Make icons white */
+}
+
+/* Button Colors */
+[data-target="i-ching"] { background-color: #bd0404; } /* Red */
+[data-target="greco-roman-oracles"] {
+    background-color: #D2B48C; /* Sandy Tan */
+    background-image: url('https://www.transparenttextures.com/patterns/rocky-wall.png');
+    color: #4A2A0C; /* Dark Brown */
+    border-color: rgba(74, 42, 12, 0.5);
+}
+[data-target="greco-roman-oracles"] img {
+    filter: none;
+}
+[data-target="mayan-glyphs"] img {
+    filter: brightness(0) invert(33%);
+}
+[data-target="runic-divination"] {
+    background-color: #5C4033; /* Dark Brown */
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+[data-target="slavic-kostromancy"] { background-color: #006400; } /* Dark Green */
+[data-target="druid-divination"] { background-color: #073207; } /* Dark Green */
+[data-target="thai-figurines"] { background-color: #A0522D; } /* Brick */
+[data-target="korean-pendulum"] { background-color:  #a9a9a9;} /* Silver */
+[data-target="caribbean-dice"] { background-color: #ADD8E6;} /* Silver */
+
+[data-target="caribbean-dice"] .dice-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+[data-target="caribbean-dice"] .dice-container > :nth-child(4) {
+    grid-column: 1 / 2;
+}
+
+[data-target="caribbean-dice"] .dice-container > :nth-child(5) {
+    grid-column: 2 / 3;
+}
+[data-target="fortune-cookie"] { background-color: #f4c668; } /* Ivory */
+[data-target="crystal-ball"] { background-color: #2f1785; } /* BlueViolet */
+[data-target="mayan-glyphs"] { background-color: #d5d5d5; color: #555353; }
+[data-target="egyptian-pyramids"] { background-color: #e6a027; } /* Khaki */
+
+
+/* Back Button */
+.back-btn {
+    position: fixed !important;
+    bottom: 2rem !important; right: 2rem !important;
+    z-index: 1000;
+    background-color: rgba(51, 51, 51, 0.8);
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    border-radius: 50%;
+    width: 60px; height: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    transition: transform 0.1s;
+}
+.back-btn:hover { transform: scale(1.05); }
+.back-btn svg { stroke: #d4af37; }
+
+/* General Content */
+main { width: 100%; padding: 1rem 0; box-sizing: border-box; }
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Divination Screen Content */
+.result-area { margin-top: 1.5rem; padding: 1.5rem; background: rgba(0,0,0,0.3); border: 1px solid rgba(212,175,55,0.2); border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+.divination-title { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: bold; color: #d4af37; text-align: center; margin-bottom: 0.5rem; }
+.divination-description { font-size: 0.9rem; text-align: center; margin-bottom: 1.5rem; color: #aaa; }
+.action-btn-group { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1.5rem; }
+.action-btn { background-color: #333; color: #d4af37; border: 1px solid #d4af37; border-radius: 12px; padding: 1rem; font-family: 'Cinzel', serif; font-weight: bold; transition: transform 0.1s; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; }
+.action-btn:hover { transform: scale(1.05); }
+.result-area p, .result-container p {
+    font-size: 0.9rem !important;
+}
+
+i-ching { background-image: linear-gradient(to bottom, #bd0303, #FFD700); }
+greco-roman-oracles { background-image: linear-gradient(to bottom, #cd9922, #FFD700); }
+runic-divination { background-image: linear-gradient(to bottom, #5C4033, #8a4d04); }
+slavic-kostromancy { background-image: linear-gradient(to bottom, #006400, #ceebdb); }
+druid-divination { background-image: linear-gradient(to bottom, #99b199, #082c01); }
+thai-figurines { background-image: linear-gradient(to bottom, #442601, #f59e06); }
+korean-pendulum { background-image: linear-gradient(to bottom, #C0C0C0, #262426); }
+caribbean-dice { background-image: linear-gradient(to bottom, #ADD8E6, #5c909f); }
+fortune-cookie { background-image: linear-gradient(to bottom, #fdf5b2, #67620e); }
+crystal-ball { background-image: linear-gradient(to bottom, #7c9af6, #152145); }
+mayan-glyphs { background-image: linear-gradient(to bottom, #d3d3d3, #a9a9a9); }
+egyptian-pyramids { background-image: linear-gradient(to bottom, #f7c88e, #544430); }

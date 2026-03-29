@@ -1,14 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Ancient Divination</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+ <!--   <script src="https://telegram.org/js/telegram-analytics.js"></script>
+-->
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
-</body>
+    <div class="language-switcher">
+        <label for="language-select" id="language-label" data-i18n="language-label">Language:</label>
+        <select id="language-select">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+        </select>
+    </div>
+    <div id="app-container">
+        <div id="main-screen" class="screen active">
+            <nav>
+                <button class="nav-btn" data-target="i-ching"><img src="images/icons/I_Ching_Mandala.png" alt=""><span data-i18n="i-ching-button"></span></button>
+                <button class="nav-btn" data-target="greco-roman-oracles"><img src="images/icons/oracle.png" alt=""><span data-i18n="greco-roman-oracles-button"></span></button>
+                <button class="nav-btn" data-target="runic-divination"><img src="images/icons/Runic_letter_fe_stung.png" alt=""><span data-i18n="runic-divination-button"></span></button>
+                <button class="nav-btn" data-target="slavic-kostromancy"><img src="images/icons/Slavic_solar_symbol.png" alt=""><span data-i18n="slavic-kostromancy-button"></span></button>
+                <button class="nav-btn" data-target="druid-divination"><img src="images/icons/Ogham.png" alt=""><span data-i18n="druid-divination-button"></span></button>
+                <button class="nav-btn" data-target="thai-figurines"><img src="images/icons/Thai_building_icon.png" alt=""><span data-i18n="thai-figurines-button"></span></button>
+                <button class="nav-btn" data-target="korean-pendulum"><img src="images/icons/Korean.png" alt=""><span data-i18n="korean-pendulum-button"></span></button>
+                <button class="nav-btn" data-target="caribbean-dice"><img src="images/icons/dice.png" alt=""><span data-i18n="caribbean-dice-button"></span></button>
+                <button class="nav-btn" data-target="fortune-cookie"><img src="images/icons/fortune_cookie.png" alt=""><span data-i18n="fortune-cookie-button"></span></button>
+                <button class="nav-btn" data-target="crystal-ball"><img src="images/icons/Crystal-ball.png" alt=""><span data-i18n="crystal-ball-button"></span></button>
+                <button class="nav-btn" data-target="mayan-glyphs"><img src="images/icons/COBA_MAYAN_GLYPH.png" alt=""><span data-i18n="mayan-glyphs-button"></span></button>
+                <button class="nav-btn" data-target="egyptian-pyramids"><img src="images/icons/Pyramids_mark.png" alt=""><span data-i18n="egyptian-pyramids-button"></span></button>
+               </nav>
+        </div>
+
+        <div id="divination-screen" class="screen">
+            <button id="back-button" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <main id="main-content">
+                <div id="i-ching" class="tab-content"><i-ching></i-ching></div>
+                <div id="greco-roman-oracles" class="tab-content"><greco-roman-oracles></greco-roman-oracles></div>
+                <div id="runic-divination" class="tab-content"><runic-divination></runic-divination></div>
+                <div id="slavic-kostromancy" class="tab-content"><slavic-kostromancy></slavic-kostromancy></div>
+                <div id="druid-divination" class="tab-content"><druid-divination></druid-divination></div>
+                <div id="thai-figurines" class="tab-content"><thai-figurines></thai-figurines></div>
+                <div id="korean-pendulum" class="tab-content"><korean-pendulum></korean-pendulum></div>
+                <div id="caribbean-dice" class="tab-content"><caribbean-dice></caribbean-dice></div>
+                <div id="fortune-cookie" class="tab-content"><fortune-cookie></fortune-cookie></div>
+                <div id="crystal-ball" class="tab-content"><crystal-ball></crystal-ball></div>
+                <div id="mayan-glyphs" class="tab-content"><mayan-glyphs></mayan-glyphs></div>
+                <div id="egyptian-pyramids" class="tab-content"><egyptian-pyramids></egyptian-pyramids></div>
+              </main>
+        </div>
+    </div>
+
+    <script src="main.js" type="module"></script>
+    <script src="components/i-ching.js" type="module"></script>
+    <script src="components/greco-roman-oracles.js" type="module"></script>
+    <script src="components/runic-divination.js" type="module"></script>
+    <script src="components/slavic-kostromancy.js" type="module"></script>
+    <script src="components/druid-divination.js" type="module"></script>
+    <script src="components/thai-figurines.js" type="module"></script>
+    <script src="components/korean-pendulum.js" type="module"></script>
+    <script src="components/caribbean-dice.js" type="module"></script>
+    <script src="components/fortune-cookie.js" type="module"></script>
+    <script src="components/crystal-ball.js" type="module"></script>
+    <script src="components/mayan-glyphs.js" type="module"></script>
+    <script src="components/egyptian-pyramids.js" type="module"></script>
+ </body>
 </html>
