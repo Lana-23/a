@@ -11,58 +11,23 @@ const allDivinationComponents = [
     'slavic-kostromancy', 'druid-divination', 'thai-figurines', 
     'korean-pendulum', 'caribbean-dice', 
     'fortune-cookie', 'crystal-ball', 
-    'mayan-glyphs', 'egyptian-pyramids' 
+    'mayan-glyphs', 'egyptian-pyramids'
 ];
 
-// --- Platform Initialization and Mocks ---
-
-// Check for VK Mini Apps environment
-if (window.location.search.includes('vk_user_id')) {
-    platform = 'vk';
-} 
-// Check for Telegram Web App environment
-else if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp.initData) {
-    platform = 'telegram';
-}
-
-// Mock Telegram WebApp for development in a standard browser
-if (platform === 'web' && typeof window.Telegram === 'undefined') {
-    window.Telegram = {
-        WebApp: {
-            ready: () => console.log('Telegram WebApp mock: ready()'),
-            HapticFeedback: {
-                impactOccurred: (style) => console.log(`Telegram WebApp mock: HapticFeedback.impactOccurred(${style})`)
-            },
-            initDataUnsafe: { user: { language_code: 'en' } }
-        }
-    };
-}
-
-// Mock VK Bridge for development in a standard browser
-if (platform === 'web' && typeof vkBridge === 'undefined') {
-    window.vkBridge = {
-        send: (method, params) => {
-            console.log(`vkBridge mock: send('${method}', ${JSON.stringify(params)})`);
-            if (method === 'VKWebAppInit') return Promise.resolve({});
-            return Promise.resolve({});
-        },
-        subscribe: (event, callback) => console.log(`vkBridge mock: subscribe('${event}')`)
-    };
-}
 
 // --- Main Application Logic ---
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Initialize the platform
-    if (platform === 'telegram') {
-        window.Telegram.WebApp.ready();
-    } else if (platform === 'vk') {
-        vkBridge.send('VKWebAppInit');
-    }
+    vkBridge.send('VKWebAppInit');
 
     const mainScreen = document.getElementById('main-screen');
     const divinationScreen = document.getElementById('divination-screen');
+    const manualScreen = document.getElementById('manual-screen');
     const backButton = document.getElementById('back-button');
+    const manualLink = document.getElementById('manual-link');
+    const manualBackButton = document.getElementById('manual-back-button');
+    const manualContent = document.getElementById('manual-content');
 
     // Language initialization
     currentLanguage = await initializeLanguage();
@@ -116,6 +81,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             showScreen('main-screen');
         });
     }
+
+    if (manualLink) {
+        manualLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            triggerHapticFeedback('light');
+            await loadManualContent();
+            showScreen('manual-screen');
+        });
+    }
+
+    if (manualBackButton) {
+        manualBackButton.addEventListener('click', () => {
+            triggerHapticFeedback('light');
+            showScreen('main-screen');
+        });
+    }
     
     showScreen('main-screen');
 });
@@ -125,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function initializeLanguage() {
     const savedLanguage = localStorage.getItem('language');
     if (savedLanguage && translations[savedLanguage]) return savedLanguage;
-
+/*
     if (platform === 'vk') {
         const params = new URLSearchParams(window.location.search);
         const vkLang = params.get('vk_language');
@@ -136,7 +117,7 @@ async function initializeLanguage() {
         const userLanguage = window.Telegram.WebApp.initDataUnsafe.user?.language_code || 'en';
         if (translations[userLanguage]) return userLanguage;
     }
-
+*/
     return 'en'; // Default language
 }
 
@@ -147,6 +128,7 @@ function setLanguage(lang, updateMainUI = true) {
         updateUI(lang);
     }
     setLanguageOnComponents(lang);
+    loadManualContent(); // Reload manual content on language change
 }
 
 function setLanguageOnComponents(lang) {
@@ -176,5 +158,34 @@ function triggerHapticFeedback(style = 'light') {
     } else if (platform === 'vk') {
         const vkStyle = style === 'light' ? 'light' : (style === 'medium' ? 'medium' : 'heavy');
         vkBridge.send('VKWebAppTapticImpactOccurred', { style: vkStyle });
+    }
+}
+
+async function loadManualContent() {
+    const manualContentEl = document.getElementById('manual-content');
+    if (!manualContentEl) return;
+
+    const fileName = currentLanguage === 'ru' ? 'MANUAL_RU.md' : 'MANUAL_EN.md';
+
+    try {
+        const response = await fetch(fileName);
+        if (!response.ok) {
+            manualContentEl.innerHTML = `<p>Error loading manual. Please try again later.</p>`;
+            return;
+        }
+        const markdown = await response.text();
+        // Super simple markdown to HTML conversion
+        let html = markdown
+            .split('\n').map(line => {
+                if (line.startsWith('### ')) return `<h3>${line.substring(4)}</h3>`;
+                if (line.startsWith('## ')) return `<h2>${line.substring(3)}</h2>`;
+                if (line.startsWith('# ')) return `<h1>${line.substring(2)}</h1>`;
+                if (line.trim() === '') return '<br>';
+                return `<p>${line}</p>`;
+            }).join('');
+        manualContentEl.innerHTML = html;
+    } catch (error) {
+        console.error('Error fetching or parsing manual:', error);
+        manualContentEl.innerHTML = `<p>Error loading manual. Please try again later.</p>`;
     }
 }

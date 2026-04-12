@@ -1,6 +1,7 @@
 export const ru = {
     "app-title": "Древние гадания",
     "language-label": "Язык:",
+    "manual-link": "Руководство пользователя",
     "runic-divination-button": "Руническое гадание",
     "slavic-kostromancy-button": "Славянская костомантия",
     "greco-roman-oracles-button": "Греко-римские оракулы",

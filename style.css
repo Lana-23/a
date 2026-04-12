@@ -44,12 +44,44 @@ body {
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
 }
 
-/* Language Switcher */
-.language-switcher {
+/* Top Bar for Language Switcher and Manual Link */
+.top-bar {
     position: fixed;
-    top: 1rem; right: 1rem;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: var(--tg-theme-secondary-bg-color, rgba(13, 10, 26, 0.8));
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
 }
+
+.language-switcher {
+    position: static;
+    transform: none;
+    top: auto;
+    right: auto;
+    z-index: auto;
+    display: flex;
+    align-items: center;
+}
+
+#manual-link {
+    color: var(--tg-theme-button-text-color, #d4af37);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+#manual-link:hover {
+    color: #fff;
+}
+
 #language-select {
     background-color: var(--tg-theme-secondary-bg-color, rgba(51, 51, 51, 0.8));
     color: var(--tg-theme-button-text-color, #d4af37);
@@ -184,6 +216,41 @@ main { width: 100%; padding: 1rem 0; box-sizing: border-box; }
     font-size: 0.9rem !important;
 }
 
+/* Manual Screen */
+#manual-screen {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #e0e0e0;
+    padding: 6rem 2rem 2rem; /* Add more padding at the top */
+    z-index: 1002; /* Make sure it's on top */
+}
+
+#manual-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Merriweather', serif;
+    line-height: 1.8;
+}
+
+#manual-content h1, #manual-content h2, #manual-content h3 {
+    font-family: 'Cinzel', serif;
+    color: #d4af37;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#manual-content p {
+    margin-bottom: 1rem;
+}
+
+#manual-content a {
+    color: #d4af37;
+    text-decoration: none;
+}
+
+#manual-content a:hover {
+    text-decoration: underline;
+}
+
 i-ching { background-image: linear-gradient(to bottom, #bd0303, #FFD700); }
 greco-roman-oracles { background-image: linear-gradient(to bottom, #cd9922, #FFD700); }
 runic-divination { background-image: linear-gradient(to bottom, #5C4033, #8a4d04); }
@@ -196,3 +263,10 @@ fortune-cookie { background-image: linear-gradient(to bottom, #fdf5b2, #67620e);
 crystal-ball { background-image: linear-gradient(to bottom, #7c9af6, #152145); }
 mayan-glyphs { background-image: linear-gradient(to bottom, #d3d3d3, #a9a9a9); }
 egyptian-pyramids { background-image: linear-gradient(to bottom, #f7c88e, #544430); }
+
+@media (max-width: 600px) {
+    .top-bar {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

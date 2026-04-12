@@ -1,6 +1,7 @@
 export const en = {
     "app-title": "Ancient Divination",
     "language-label": "Language:",
+    "manual-link": "User Manual",
     "runic-divination-button": "Runic Divination",
     "slavic-kostromancy-button": "Slavic Kostromancy",
     "greco-roman-oracles-button": "Greco-Roman Oracles",

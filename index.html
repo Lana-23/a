@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Ancient Divination</title>
+    <title>12 Гаданий</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -12,13 +12,17 @@
 -->
 </head>
 <body>
-    <div class="language-switcher">
-        <label for="language-select" id="language-label" data-i18n="language-label">Language:</label>
-        <select id="language-select">
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-        </select>
+    <div class="top-bar">
+        <div class="language-switcher">
+            <label for="language-select" id="language-label" data-i18n="language-label">Language:</label>
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+            </select>
+        </div>
+        <a href="#" id="manual-link" data-i18n="manual-link">User Manual</a>
     </div>
+
     <div id="app-container">
         <div id="main-screen" class="screen active">
             <nav>
@@ -55,6 +59,12 @@
                 <div id="mayan-glyphs" class="tab-content"><mayan-glyphs></mayan-glyphs></div>
                 <div id="egyptian-pyramids" class="tab-content"><egyptian-pyramids></egyptian-pyramids></div>
               </main>
+        </div>
+        <div id="manual-screen" class="screen">
+            <button id="manual-back-button" class="back-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <div id="manual-content"></div>
         </div>
     </div>
 
